@@ -1,4 +1,4 @@
-certbot_email: mail@deworker.pro
+certbot_email: mail@slim.pro
 certbot_hosts:
-  - demo-auction.deworker.pro
-  - api.demo-auction.deworker.pro
+  - demo-slim.server.pro
+  - api.demo-slim.server.pro

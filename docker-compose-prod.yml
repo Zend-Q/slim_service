@@ -23,3 +23,11 @@ services:
   api-php-fpm:
     image: ${REGISTRY}/slim_service-api-php-fpm:${IMAGE_TAG}
     restart: always
+    environment:
+      APP_ENV: prod
+      APP_DEBUG: 0
+  api-php-cli:
+    image: ${REGISTRY}/slim_service-api-php-cli:${IMAGE_TAG}
+    environment:
+      APP_ENV: prod
+      APP_DEBUG: 0
