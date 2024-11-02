@@ -1,7 +1,15 @@
 FROM php:8.3-fpm-alpine
 
+RUN apk add --no-cache autoconf g++ make \
+    && apk add --update linux-headers \
+    && pecl install xdebug-3.3.2 \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable xdebug
+
 RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
 COPY ./common/php/conf.d /usr/local/etc/php/conf.d
+COPY ./develop/php/conf.d /usr/local/etc/php/conf.d
+COPY ./develop/php-fpm/conf.d /usr/local/etc/php/conf.d
 
 WORKDIR /app

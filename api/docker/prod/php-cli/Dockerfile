@@ -1,6 +1,6 @@
 FROM php:8.3-cli-alpine AS builder
 
-RUN apk add unzip
+RUN apk add --no-cache unzip
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
@@ -24,7 +24,7 @@ RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 
 COPY ./docker/common/php/conf.d /usr/local/etc/php/conf.d
 
-COPY ./docker/prod/php/conf.d /usr/local/etc/php/conf.d
+COPY ./docker/production/php/conf.d /usr/local/etc/php/conf.d
 
 WORKDIR /app
 

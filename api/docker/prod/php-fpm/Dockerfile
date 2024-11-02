@@ -1,6 +1,6 @@
 FROM php:8.3-fpm-alpine AS builder
 
-RUN apk add unzip
+RUN apk add --no-cache unzip
 
 RUN docker-php-ext-install opcache
 
