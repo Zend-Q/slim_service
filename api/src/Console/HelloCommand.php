@@ -16,9 +16,11 @@ final class HelloCommand extends Command
             ->setName('hello')
             ->setDescription('Hello command');
     }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<info>Hello!</info>');
+
         return 0;
     }
 }

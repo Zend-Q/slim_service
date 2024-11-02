@@ -1,17 +1,28 @@
+#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
 
-$files = array_merge(
-    glob(__DIR__ . '/common/*.php') ?: [],
-    glob(__DIR__ . '/' . (getenv('APP_ENV') ?: 'prod') . '/*.php') ?: []
-);
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
 
-$configs = array_map(
-    static function ($file) {
-        return require $file;
-    },
-    $files
-);
+require __DIR__ . '/../vendor/autoload.php';
 
-return array_replace_recursive(...$configs);
+/** @var ContainerInterface $container */
+$container = require __DIR__ . '/../config/container.php';
+
+$cli = new Application('Console');
+
+/**
+ * @var string[] $commands
+ * @psalm-suppress MixedArrayAccess
+ */
+$commands = $container->get('config')['console']['commands'];
+foreach ($commands as $name) {
+    /** @var Command $command */
+    $command = $container->get($name);
+    $cli->add($command);
+}
+
+$cli->run();
