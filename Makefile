@@ -17,22 +17,28 @@ docker-build:
 	docker-compose build --pull
 
 api-init: api-composer-install api-permissions
+test: api-test
 lint: api-lint
-app-cs-fix: api-fix
+check: lint analyze test
+fix: api-fix
 analyze: api-analyze
+
+api-test:
+	docker-compose run --rm api-php-cli composer test
+api-fix:
+	docker-compose run --rm api-php-cli composer php-cs-fixer fix
+api-clear:
+	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/cache/* var/log/* var/test/*'
 
 api-composer-install:
 	docker-compose run --rm api-php-cli composer install
 api-lint:
 	docker-compose run --rm api-php-cli composer lint
-	docker-compose run --rm api-php-cli composer cs-check
+	docker-compose run --rm api-php-cli composer php-cs-fixer fix -- --dry-run --diff
 api-analyze:
 	docker-compose run --rm api-php-cli composer psalm
 api-permissions:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine chmod 777 var
-
-api-fix:
-	docker-compose run --rm api-php-cli composer cs-fix
 
 build: build-gateway build-frontend build-api
 

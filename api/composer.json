@@ -16,20 +16,26 @@
     },
     "require-dev": {
         "overtrue/phplint": "^9.5",
+        "phpunit/phpunit": "^9.6",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.10",
-        "vimeo/psalm": "^5.26"
+        "vimeo/psalm": "^5.26",
+        "friendsofphp/php-cs-fixer": "^3.40"
     },
     "autoload": {
         "psr-4": {
             "App\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
+        }
+    },
     "scripts": {
         "lint": "phplint",
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
+        "php-cs-fixer": "vendor/bin/php-cs-fixer --config=.php-cs-fixer.php --allow-risky=yes",
         "psalm": "psalm",
+        "test": "phpunit --colors=always",
         "app": "php bin/app.php --ansi"
     }
 }
