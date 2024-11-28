@@ -32,7 +32,7 @@ final readonly class Handler
             throw new DomainException('User already exists.');
         }
         $date = new DateTimeImmutable();
-        $user = new User(
+        $user = User::requestJoinByEmail(
             Id::generate(),
             $date,
             $email,
