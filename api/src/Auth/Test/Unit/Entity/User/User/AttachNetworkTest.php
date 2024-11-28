@@ -16,7 +16,7 @@ final class AttachNetworkTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $user = (new UserBuilder())
+        $user    = (new UserBuilder())
             ->active()
             ->build();
         $network = new NetworkIdentity('vk', '0000001');
@@ -27,7 +27,7 @@ final class AttachNetworkTest extends TestCase
 
     public function testAlready(): void
     {
-        $user = (new UserBuilder())
+        $user    = (new UserBuilder())
             ->active()
             ->build();
         $network = new NetworkIdentity('vk', '0000001');

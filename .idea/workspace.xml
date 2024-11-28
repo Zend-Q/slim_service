@@ -4,21 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a4a3fc4-210f-436d-9a51-134c6c034e68" name="Changes" comment="Lesson 14">
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/AttachNetwork/Command.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/AttachNetwork/Handler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/JoinByEmail/JoinByNetwork/Command.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/JoinByEmail/JoinByNetwork/Handler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Entity/User/NetworkIdentity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/NetworkIdentityTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/User/AttachNetworkTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/User/JoinByNetworkTest.php" afterDir="false" />
+    <list default="true" id="4a4a3fc4-210f-436d-9a51-134c6c034e68" name="Changes" comment="Lesson 15">
+      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/ResetPassword/Request/Command.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/ResetPassword/Request/Handler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/Auth/Service/PasswordResetTokenSender.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/Token/ExpiresTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/User/RequestTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/Auth/Command/JoinByEmail/Request/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Command/JoinByEmail/Request/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/Auth/Entity/User/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Entity/User/Token.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/src/Auth/Entity/User/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Entity/User/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/src/Auth/Entity/User/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Entity/User/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/Auth/Test/Builder/UserBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Test/Builder/UserBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/JoinByEmail/RequestTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/JoinByEmail/RequestTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/User/AttachNetworkTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/User/AttachNetworkTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +166,7 @@
     "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm": "Docker Compose",
     "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm": "Docker Compose",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "//wsl$/Ubuntu/home/z128/slim_service/api/src/Auth/Command/AttachNetwork",
+    "last_opened_file_path": "//wsl$/Ubuntu/home/z128/slim_service/api/src/Auth/Command/ResetPassword/Request",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -183,11 +179,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Command\ResetPassword\Request" />
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Command\AttachNetwork" />
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Command\JoinByEmail\JoinByNetwork" />
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\docker\prod" />
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\docker\develop" />
-      <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\docker\common\php" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\static" />
@@ -236,7 +232,7 @@
       <workItem from="1732003294837" duration="593000" />
       <workItem from="1732110025323" duration="7000" />
       <workItem from="1732513729974" duration="14202000" />
-      <workItem from="1732704588910" duration="10687000" />
+      <workItem from="1732704588910" duration="16142000" />
     </task>
     <task id="LOCAL-00001" summary="Lesson 9">
       <option name="closed" value="true" />
@@ -254,7 +250,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732705200601</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Lesson 15">
+      <option name="closed" value="true" />
+      <created>1732775979811</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732775979811</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +267,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Lesson 9" />
     <MESSAGE value="Lesson 14" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lesson 14" />
+    <MESSAGE value="Lesson 15" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lesson 15" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -13,6 +13,7 @@ final class User
     private ?string $passwordHash = null;
     private ?Token $joinConfirmToken = null;
     private ArrayObject $networks;
+    private ?Token $passwordResetToken = null;
 
     public function __construct(
         private readonly Id $id,
@@ -56,6 +57,28 @@ final class User
         $this->joinConfirmToken->validate($token, $date);
         $this->status           = Status::ACTIVE;
         $this->joinConfirmToken = null;
+    }
+
+    public function attachNetwork(NetworkIdentity $identity): void
+    {
+        /** @var NetworkIdentity $existing */
+        foreach ($this->networks as $existing) {
+            if ($existing->isEqualTo($identity)) {
+                throw new DomainException('Network is already attached.');
+            }
+        }
+        $this->networks->append($identity);
+    }
+
+    public function requestPasswordReset(Token $token, DateTimeImmutable $date): void
+    {
+        if (!$this->isActive()) {
+            throw new DomainException('User is not active.');
+        }
+        if ($this->passwordResetToken !== null && !$this->passwordResetToken->isExpiredTo($date)) {
+            throw new DomainException('Resetting is already requested.');
+        }
+        $this->passwordResetToken = $token;
     }
 
     public function isWait(): bool
@@ -102,14 +125,8 @@ final class User
         return $this->networks->getArrayCopy();
     }
 
-    public function attachNetwork(NetworkIdentity $identity): void
+    public function getPasswordResetToken(): ?Token
     {
-        /** @var NetworkIdentity $existing */
-        foreach ($this->networks as $existing) {
-            if ($existing->isEqualTo($identity)) {
-                throw new DomainException('Network is already attached.');
-            }
-        }
-        $this->networks->append($identity);
+        return $this->passwordResetToken;
     }
 }
