@@ -81,4 +81,11 @@ final class UserBuilder
         $clone->networkIdentity = $identity ?? new NetworkIdentity('vk', '0000001');
         return $clone;
     }
+
+    public function withEmail(Email $email): self
+    {
+        $clone = clone $this;
+        $clone->email = $email;
+        return $clone;
+    }
 }

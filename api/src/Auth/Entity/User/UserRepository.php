@@ -25,4 +25,6 @@ interface UserRepository
      * @throws DomainException
      */
     public function getByEmail(Email $email): User;
+
+    public function findByNewEmailToken(string $token): ?User;
 }

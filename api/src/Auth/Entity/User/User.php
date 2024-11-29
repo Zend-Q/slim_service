@@ -15,11 +15,13 @@ final class User
     private ?Token $joinConfirmToken = null;
     private ArrayObject $networks;
     private ?Token $passwordResetToken = null;
+    private ?Email $newEmail = null;
+    private ?Token $newEmailToken = null;
 
     public function __construct(
         private readonly Id $id,
         private readonly DateTimeImmutable $date,
-        private readonly Email $email,
+        private Email $email,
         private Status $status
     ) {
         $this->networks = new ArrayObject();
@@ -93,6 +95,32 @@ final class User
         $this->passwordHash = $hasher->hash($new);
     }
 
+    public function requestEmailChanging(Token $token, DateTimeImmutable $date, Email $email): void
+    {
+        if (!$this->isActive()) {
+            throw new DomainException('User is not active.');
+        }
+        if ($this->email->isEqualTo($email)) {
+            throw new DomainException('Email is already same.');
+        }
+        if ($this->newEmailToken !== null && !$this->newEmailToken->isExpiredTo($date)) {
+            throw new DomainException('Changing is already requested.');
+        }
+        $this->newEmail = $email;
+        $this->newEmailToken = $token;
+    }
+
+    public function confirmEmailChanging(string $token, DateTimeImmutable $date): void
+    {
+        if ($this->newEmail === null || $this->newEmailToken === null) {
+            throw new DomainException('Changing is not requested.');
+        }
+        $this->newEmailToken->validate($token, $date);
+        $this->email = $this->newEmail;
+        $this->newEmail = null;
+        $this->newEmailToken = null;
+    }
+
     public function isWait(): bool
     {
         return $this->status->isWait();
@@ -140,5 +168,15 @@ final class User
     public function getPasswordResetToken(): ?Token
     {
         return $this->passwordResetToken;
+    }
+
+    public function getNewEmail(): ?Email
+    {
+        return $this->newEmail;
+    }
+
+    public function getNewEmailToken(): ?Token
+    {
+        return $this->newEmailToken;
     }
 }
