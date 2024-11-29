@@ -17,11 +17,12 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
+        "dg/bypass-finals": "^1.8",
+        "friendsofphp/php-cs-fixer": "^3.40",
         "overtrue/phplint": "^9.5",
         "phpunit/phpunit": "^9.6",
         "roave/security-advisories": "dev-master",
-        "vimeo/psalm": "^5.26",
-        "friendsofphp/php-cs-fixer": "^3.40"
+        "vimeo/psalm": "^5.26"
     },
     "autoload": {
         "psr-4": {
