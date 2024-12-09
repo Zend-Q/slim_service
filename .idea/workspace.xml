@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a4a3fc4-210f-436d-9a51-134c6c034e68" name="Changes" comment="Lesson 17">
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/ChangeEmail/Confirm/Command.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/ChangeEmail/Confirm/Handler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/ChangeEmail/Request/Command.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/ChangeEmail/Request/Handler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Service/NewEmailConfirmTokenSender.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/User/ChangeEmail/ConfirmTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/src/Auth/Test/Unit/Entity/User/User/ChangeEmail/RequestTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/ChangeRole/Command.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/Auth/Command/ChangeRole/Handler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/Auth/Entity/User/Role.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/Auth/Entity/User/Email.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Entity/User/Email.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/Auth/Entity/User/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Entity/User/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/Auth/Entity/User/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Entity/User/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/Auth/Test/Builder/UserBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/Auth/Test/Builder/UserBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/.idea/api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/api/.idea/api.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +162,7 @@
     &quot;credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm&quot;: &quot;Docker Compose&quot;,
     &quot;credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm&quot;: &quot;Docker Compose&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/z128/slim_service/api/src/Auth/Command/ChangeEmail/Confirm&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/z128/slim_service/api/src/Auth/Command/ChangeRole&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -182,11 +175,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Command\ChangeRole" />
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Command\ChangeEmail\Confirm" />
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Command\ChangeEmail" />
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Test\Unit" />
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Command\ChangePassword\Request" />
-      <recent name="\\wsl$\Ubuntu\home\z128\slim_service\api\src\Auth\Command\ResetPassword\Request" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="\\wsl$\Ubuntu\home\z128\slim_service\static" />
@@ -237,6 +230,11 @@
       <workItem from="1732513729974" duration="14202000" />
       <workItem from="1732704588910" duration="52327000" />
       <workItem from="1732881470884" duration="615000" />
+      <workItem from="1733117774326" duration="9000" />
+      <workItem from="1733139453538" duration="168000" />
+      <workItem from="1733223570211" duration="98000" />
+      <workItem from="1733470788394" duration="17000" />
+      <workItem from="1733721025877" duration="595000" />
     </task>
     <task id="LOCAL-00001" summary="Lesson 9">
       <option name="closed" value="true" />
