@@ -11,19 +11,21 @@ use DomainException;
 
 final class User
 {
-    private ?string $passwordHash = null;
-    private ?Token $joinConfirmToken = null;
+    private ?string $passwordHash       = null;
+    private ?Token $joinConfirmToken   = null;
     private ArrayObject $networks;
     private ?Token $passwordResetToken = null;
-    private ?Email $newEmail = null;
-    private ?Token $newEmailToken = null;
+    private ?Email $newEmail           = null;
+    private ?Token $newEmailToken      = null;
+    private Role $role;
 
     public function __construct(
         private readonly Id $id,
         private readonly DateTimeImmutable $date,
         private Email $email,
-        private Status $status
+        private Status $status,
     ) {
+        $this->role     = Role::USER;
         $this->networks = new ArrayObject();
     }
 
@@ -35,6 +37,7 @@ final class User
     ): self {
         $user = new self($id, $date, $email, Status::ACTIVE);
         $user->networks->append($identity);
+
         return $user;
     }
 
@@ -106,7 +109,7 @@ final class User
         if ($this->newEmailToken !== null && !$this->newEmailToken->isExpiredTo($date)) {
             throw new DomainException('Changing is already requested.');
         }
-        $this->newEmail = $email;
+        $this->newEmail      = $email;
         $this->newEmailToken = $token;
     }
 
@@ -116,9 +119,21 @@ final class User
             throw new DomainException('Changing is not requested.');
         }
         $this->newEmailToken->validate($token, $date);
-        $this->email = $this->newEmail;
-        $this->newEmail = null;
+        $this->email         = $this->newEmail;
+        $this->newEmail      = null;
         $this->newEmailToken = null;
+    }
+
+    public function changeRole(Role $role): void
+    {
+        $this->role = $role;
+    }
+
+    public function remove(): void
+    {
+        if (!$this->isWait()) {
+            throw new DomainException('Unable to remove active user.');
+        }
     }
 
     public function isWait(): bool
@@ -178,5 +193,10 @@ final class User
     public function getNewEmailToken(): ?Token
     {
         return $this->newEmailToken;
+    }
+
+    public function getRole(): Role
+    {
+        return $this->role;
     }
 }

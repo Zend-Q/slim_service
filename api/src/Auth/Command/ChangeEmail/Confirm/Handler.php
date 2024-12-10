@@ -20,8 +20,8 @@ final readonly class Handler
         private Tokenizer $tokenizer,
         private NewEmailConfirmTokenSender $sender,
         private Flusher $flusher
-    ) {
-    }
+    ) {}
+
     public function handle(Command $command): void
     {
         $user = $this->users->get(new Id($command->id));

@@ -27,4 +27,6 @@ interface UserRepository
     public function getByEmail(Email $email): User;
 
     public function findByNewEmailToken(string $token): ?User;
+
+    public function remove(User $user): void;
 }
