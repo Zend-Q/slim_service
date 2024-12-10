@@ -6,5 +6,6 @@ namespace App\Auth\Command\ChangeEmail\Confirm;
 
 final class Command
 {
-    public string $token = '';
+    public string $id = '';
+    public string $email = '';
 }
