@@ -37,6 +37,10 @@ services:
             XDEBUG_MODE: debug
             XDEBUG_SESSION: 1
             PHP_IDE_CONFIG: serverName=slim_service
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD: secret
+            DB_NAME: app
         volumes:
             - ./api:/app
 
@@ -50,5 +54,23 @@ services:
             XDEBUG_MODE: debug
             XDEBUG_SESSION: 1
             PHP_IDE_CONFIG: serverName=slim_service
+            DB_HOST: api-postgres
+            DB_USER: app
+            DB_PASSWORD: secret
+            DB_NAME: app
         volumes:
             - ./api:/app
+
+    api-postgres:
+        image: postgres:12.2-alpine
+        environment:
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: app
+        volumes:
+            -   api-postgres:/var/lib/postgresql/data
+        ports:
+            -   "54321:5432"
+
+volumes:
+    api-postgres:
