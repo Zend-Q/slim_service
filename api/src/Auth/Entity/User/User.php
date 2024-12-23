@@ -7,10 +7,18 @@ namespace App\Auth\Entity\User;
 use App\Auth\Service\PasswordHasher;
 use ArrayObject;
 use DateTimeImmutable;
+use Doctrine\ORM\Mapping as ORM;
 use DomainException;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="auth_users")
+ */
 final class User
 {
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
     private ?string $passwordHash       = null;
     private ?Token $joinConfirmToken   = null;
     private ?Token $passwordResetToken = null;
@@ -20,7 +28,14 @@ final class User
     private ArrayObject $networks;
 
     public function __construct(
+        /**
+         * @ORM\Column(type="auth_user_id")
+         * @ORM\Id
+         */
         private readonly Id $id,
+        /**
+         * @ORM\Column(type="datetime_immutable")
+         */
         private readonly DateTimeImmutable $date,
         private Email $email,
         private Status $status,
@@ -33,7 +48,7 @@ final class User
         Id $id,
         DateTimeImmutable $date,
         Email $email,
-        NetworkIdentity $identity
+        Network $identity
     ): self {
         $user = new self($id, $date, $email, Status::ACTIVE);
         $user->networks->append($identity);
@@ -65,9 +80,9 @@ final class User
         $this->joinConfirmToken = null;
     }
 
-    public function attachNetwork(NetworkIdentity $identity): void
+    public function attachNetwork(Network $identity): void
     {
-        /** @var NetworkIdentity $existing */
+        /** @var Network $existing */
         foreach ($this->networks as $existing) {
             if ($existing->isEqualTo($identity)) {
                 throw new DomainException('Network is already attached.');
@@ -172,11 +187,11 @@ final class User
     }
 
     /**
-     * @return NetworkIdentity[]
+     * @return Network[]
      */
     public function getNetworks(): array
     {
-        /** @var NetworkIdentity[] */
+        /** @var Network[] */
         return $this->networks->getArrayCopy();
     }
 

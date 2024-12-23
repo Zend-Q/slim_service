@@ -6,7 +6,7 @@ namespace App\Auth\Test\Builder;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Id;
-use App\Auth\Entity\User\NetworkIdentity;
+use App\Auth\Entity\User\Network;
 use App\Auth\Entity\User\Token;
 use App\Auth\Entity\User\User;
 use DateTimeImmutable;
@@ -14,13 +14,13 @@ use Ramsey\Uuid\Uuid;
 
 final class UserBuilder
 {
-    private Id $id;
-    private Email $email;
-    private string $hash;
+    private Id                $id;
+    private Email             $email;
+    private string            $hash;
     private DateTimeImmutable $date;
-    private Token $joinConfirmToken;
-    private bool $active = false;
-    private ?NetworkIdentity $networkIdentity = null;
+    private Token             $joinConfirmToken;
+    private bool              $active  = false;
+    private ?Network          $network = null;
 
     public function __construct()
     {
@@ -49,12 +49,12 @@ final class UserBuilder
 
     public function build(): User
     {
-        if ($this->networkIdentity !== null) {
+        if ($this->network !== null) {
             return User::joinByNetwork(
                 $this->id,
                 $this->date,
                 $this->email,
-                $this->networkIdentity
+                $this->network
             );
         }
 
@@ -75,17 +75,19 @@ final class UserBuilder
         return $user;
     }
 
-    public function viaNetwork(?NetworkIdentity $identity = null): self
+    public function viaNetwork(?Network $network = null): self
     {
-        $clone = clone $this;
-        $clone->networkIdentity = $identity ?? new NetworkIdentity('vk', '0000001');
+        $clone          = clone $this;
+        $clone->network = $network ?? new Network('vk', '0000001');
+
         return $clone;
     }
 
     public function withEmail(Email $email): self
     {
-        $clone = clone $this;
+        $clone        = clone $this;
         $clone->email = $email;
+
         return $clone;
     }
 }
