@@ -10,13 +10,15 @@ use App\Auth\Entity\User\Network;
 use App\Auth\Entity\User\User;
 use App\Auth\Entity\User\UserRepository;
 use App\Flusher;
+use DateTimeImmutable;
+use DomainException;
 
 final readonly class Handler
 {
     public function __construct(
         private UserRepository $users,
         private Flusher $flusher
-    ){}
+    ) {}
 
     public function handle(Command $command): void
     {
@@ -24,16 +26,16 @@ final readonly class Handler
         $email = new Email($command->email);
 
         if ($this->users->hasByNetwork($network)) {
-            throw new \DomainException('User with this network already exists.');
+            throw new DomainException('User with this network already exists.');
         }
 
         if ($this->users->hasByEmail($email)) {
-            throw new \DomainException('User with this email already exists.');
+            throw new DomainException('User with this email already exists.');
         }
 
         $user = User::joinByNetwork(
             Id::generate(),
-            new \DateTimeImmutable(),
+            new DateTimeImmutable(),
             $email,
             $network
         );

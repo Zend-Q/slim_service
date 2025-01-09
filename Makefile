@@ -16,10 +16,10 @@ docker-pull:
 docker-build:
 	docker-compose build --pull
 
-api-init: api-composer-install api-permissions
+api-init: api-composer-install api-permissions api-wait-db api-migrations api-fixtures
 test: api-test
 lint: api-lint
-check: lint analyze test
+check: lint analyze validate-schema test
 fix: api-fix
 analyze: api-analyze
 
@@ -30,6 +30,14 @@ api-fix:
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/cache/* var/log/* var/test/*'
 
+api-wait-db:
+	docker-compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
+api-migrations:
+	docker-compose run --rm api-php-cli composer app migrations:migrate
+api-fixtures:
+	docker-compose run --rm api-php-cli composer app fixtures:load
+api-validate-schema:
+	docker-compose run --rm api-php-cli composer app orm:validate-schema
 api-composer-install:
 	docker-compose run --rm api-php-cli composer install
 api-lint:
@@ -72,6 +80,9 @@ deploy:
 	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && echo "IMAGE_TAG=${IMAGE_TAG}" >> .env'
 	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && echo "API_DB_PASSWORD=${API_DB_PASSWORD}" >> .env'
 	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker-compose pull'
+	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker-compose up --build -d api-postgres'
+	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker-compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 60'
+	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker-compose run --rm api-php-cli php bin/app.php migrations:migrate --no-interaction'
 	ssh ${HOST} -p ${PORT} 'cd site_${BUILD_NUMBER} && docker-compose up --build --remove-orphans -d'
 	ssh ${HOST} -p ${PORT} 'rm -f site'
 	ssh ${HOST} -p ${PORT} 'ln -sr site_${BUILD_NUMBER} site'

@@ -19,6 +19,7 @@ final class StatusTest extends TestCase
         $status = Status::WAIT;
         self::assertEquals(Status::WAIT->name, $status->name);
     }
+
     public function testIncorrect(): void
     {
         $this->expectException(InvalidArgumentException::class);

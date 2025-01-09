@@ -14,13 +14,13 @@ use Ramsey\Uuid\Uuid;
 
 final class UserBuilder
 {
-    private Id                $id;
-    private Email             $email;
-    private string            $hash;
+    private Id $id;
+    private Email $email;
+    private string $hash;
     private DateTimeImmutable $date;
-    private Token             $joinConfirmToken;
-    private bool              $active  = false;
-    private ?Network          $network = null;
+    private Token $joinConfirmToken;
+    private bool $active  = false;
+    private ?Network $network = null;
 
     public function __construct()
     {

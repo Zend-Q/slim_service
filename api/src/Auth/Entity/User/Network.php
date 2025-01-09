@@ -4,12 +4,24 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity\User;
 
+use Doctrine\ORM\Mapping as ORM;
 use Webmozart\Assert\Assert;
 
+/**
+ * @ORM\Embeddable
+ */
 final class Network
 {
-    public function __construct(private string $name, private string $identity)
-    {
+    public function __construct(
+        /**
+         * @ORM\Column(type="string", length=16)
+         */
+        private string $name,
+        /**
+         * @ORM\Column(type="string", length=16)
+         */
+        private string $identity
+    ) {
         Assert::notEmpty($name);
         Assert::notEmpty($identity);
         $this->name     = mb_strtolower($name);

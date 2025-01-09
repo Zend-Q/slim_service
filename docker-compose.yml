@@ -33,6 +33,7 @@ services:
             dockerfile: develop/php-fpm/Dockerfile
         environment:
             APP_ENV: dev
+            DB_URL: pgsql://app:secret@api-postgres:5432/app
             APP_DEBUG: 1
             XDEBUG_MODE: debug
             XDEBUG_SESSION: 1
@@ -50,6 +51,7 @@ services:
             dockerfile: develop/php-cli/Dockerfile
         environment:
             APP_ENV: dev
+            DB_URL: pgsql://app:secret@api-postgres:5432/app
             APP_DEBUG: 1
             XDEBUG_MODE: debug
             XDEBUG_SESSION: 1
@@ -70,7 +72,7 @@ services:
         volumes:
             -   api-postgres:/var/lib/postgresql/data
         ports:
-            -   "54321:5432"
+            - "54321:5432"
 
 volumes:
     api-postgres:
